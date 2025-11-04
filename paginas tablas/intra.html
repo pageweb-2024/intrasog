@@ -5,42 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <title>Infraccion</title>
+    <title>datos de los documentos</title>
 </head>
 <body>
     <h1>LISTAS DE INTRA</h1>
 
-    <h2>INFRACCION</h2>
+    <h2>USUARIO</h2>
     <table class="table table-bordered border-primary">
         <thead>
-            <th>Descripcion</th>
-            <th>IDinfraccion</th>
-            <th>Multa</th>
-            <th>Tipo de Infraccion</th>            
+            <th>Apellido</th>
+            <th>Nombre</th>
+            <th>FechaRegistro</th>
+            <th>IdUsuario</th>            
+            <th>Correo</th>
+            <th>Telefono</th>
         </thead>
         <tbody id="cuerpo-tabla">
 
         </tbody>
     </table>
-    <button><a href="intra.html">LISTA DE USUARIO</a></button>
-    <button><a href="intra3.html">LISTA DE COMPARENDO</a></button>
 
+    <button><a href="intra2.html">LISTA DE INFRACCION</a></button>
+    <button><a href="intra3.html">LISTA DE COMPARENDO</a></button>
+    <button><a href="../index.html">INICIO</a></button>
     <script>
-        async function obtenerDatosInfraccion(){
-            respuesta = await fetch("http://127.0.0.1:5000/infraccion");
+        async function obtenerDatosUsuario(){
+            respuesta = await fetch("http://127.0.0.1:5000/usuario");
             console.log(respuesta); 
             datos =await respuesta.json();
             console.log(datos); 
             cuerpoTabla = document.getElementById("cuerpo-tabla");    
             cuerpoTabla.innerHTML = "  ";
-            datos.forEach(infraccion => {
+            datos.forEach(usuario => {
             fila = document.createElement("tr");
-            fila.innerHTML = `<td>${infraccion.descripcion}</td><td>${infraccion.idInfraccion}</td><td>${infraccion.multa}</td><td>${infraccion.tipoInfraccion}</td>`;
+            fila.innerHTML = `<td>${usuario.apellido}</td><td>${usuario.nombre}</td><td>${usuario.fechaRegistro}</td><td>${usuario.idUsuario}</td><td>${usuario.correo}</td><td>${usuario.telefono}</td>`;
             cuerpoTabla.appendChild(fila);
             });             
         }
 
-        document.addEventListener('DOMContentLoaded', obtenerDatosInfraccion);
+        document.addEventListener('DOMContentLoaded', obtenerDatosUsuario);
     </script>
 </body>
 </html>
